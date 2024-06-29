@@ -24,7 +24,7 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid Usuario usuario, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Usuario> cadastrar(@RequestBody @Valid Usuario usuario, UriComponentsBuilder uriBuilder) {
         service.cadastrarUsuario(usuario);
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 
