@@ -32,15 +32,6 @@ public class Usuario {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario {"+
-        this.cpf + "," +
-        this.email + "," +
-        this.nome + 
-        "}";
-    }
-
     public String getCpf() {
         return cpf;
     }
