@@ -2,15 +2,20 @@ package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
 
+import br.com.alura.codechella.domain.Patterns;
+
 public class Usuario {
+
     private String cpf;
     private String nome;
     private LocalDate nascimento;
     private String email;
     
     public Usuario(String cpf, String nome, LocalDate nascimento, String email) {
-        if(cpf == null || !cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}"))
+        if(cpf == null || !Patterns.CPF_PATTERN.matcher(cpf).matches())
             throw new IllegalArgumentException("CPF no padrão incorreto");
+        if(email == null || !Patterns.EMAIL_PATTERN.matcher(email).matches())
+            throw new IllegalArgumentException("Email no padrão incorreto");
 
         this.cpf = cpf;
         this.nome = nome;

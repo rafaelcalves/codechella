@@ -7,24 +7,41 @@ import org.junit.jupiter.api.Test;
 
 public class UsuarioTest {
 
+    private static final String EMAIL_VALIDO = "mail@mail.com";
+    private static final String DATA_NASC_VALIDA = "1990-04-11";
+    private static final String NOME_VALIDO = "Teste";
+    private static final String CPF_VALIDO = "000.000.000-00";
+
     @Test
-    public void erroAoInformarCPFInvalido(){
+    public void erroCPFInvalido(){
         Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("","Teste",LocalDate.parse("1990-04-11"),"mail@mail.com"));
+            () -> new Usuario("",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
 
         Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(null,"Teste",LocalDate.parse("1990-04-11"),"mail@mail.com"));
+            () -> new Usuario(null,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
         
         Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("12345","Teste",LocalDate.parse("1990-04-11"),"mail@mail.com"));
+            () -> new Usuario("12345",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
         
         Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("000.000000-00","Teste",LocalDate.parse("1990-04-11"),"mail@mail.com"));
-    
+            () -> new Usuario("000.000000-00",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
     }
 
     @Test
-    public void sucessoAoInformarCPFValido(){
-        Assertions.assertNotNull(new Usuario("000.000.000-00","Teste",LocalDate.parse("1990-04-11"),"mail@mail.com"));
+    public void erroEmailInvalido(){
+        Assertions.assertThrows(IllegalArgumentException.class, 
+            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email"));
+        Assertions.assertThrows(IllegalArgumentException.class, 
+            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email.com"));
+        Assertions.assertThrows(IllegalArgumentException.class, 
+            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email@"));
+        Assertions.assertThrows(IllegalArgumentException.class, 
+            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email@com"));
     }
+
+    @Test
+    public void sucessoCamposValidos(){
+        Assertions.assertNotNull(new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
+    }
+
 }
