@@ -2,6 +2,7 @@ package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
 
+import br.com.alura.codechella.domain.Endereco;
 import br.com.alura.codechella.domain.Patterns;
 
 public class Usuario {
@@ -10,6 +11,7 @@ public class Usuario {
     private String nome;
     private LocalDate nascimento;
     private String email;
+    private Endereco endereco;
 
     public Usuario(String cpf, String nome, LocalDate nascimento, String email) {
         if (cpf == null || !Patterns.CPF_PATTERN.matcher(cpf).matches())
@@ -70,4 +72,48 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    
+public static class UsuarioBuilder {
+    private String cpf;
+    private String nome;
+    private LocalDate nascimento;
+    private String email;
+    private Endereco endereco;
+
+    public UsuarioBuilder(String cpf, String email){
+        this.cpf = cpf;
+        this.email = email;
+    }
+
+    public UsuarioBuilder nome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
+    public UsuarioBuilder nascimento(LocalDate nascimento) {
+        this.nascimento = nascimento;
+        return this;
+    }
+
+    public UsuarioBuilder endereco(Endereco endereco) {
+        this.endereco = endereco;
+        return this;
+    }
+
+    public Usuario build(){
+        Usuario usuario = new Usuario(this.cpf, this.nome, this.nascimento, this.email);
+        usuario.setEndereco(this.endereco);
+        return usuario;
+    }
+}
+
 }
