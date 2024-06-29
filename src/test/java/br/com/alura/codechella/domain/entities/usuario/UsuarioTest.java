@@ -13,35 +13,42 @@ public class UsuarioTest {
     private static final String CPF_VALIDO = "000.000.000-00";
 
     @Test
-    public void erroCPFInvalido(){
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
+    public void erroCPFInvalido() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario("", NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), EMAIL_VALIDO));
 
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(null,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
-        
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("12345",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
-        
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario("000.000000-00",NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario(null, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), EMAIL_VALIDO));
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario("12345", NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), EMAIL_VALIDO));
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario("000.000000-00", NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), EMAIL_VALIDO));
     }
 
     @Test
-    public void erroEmailInvalido(){
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email"));
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email.com"));
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email@"));
-        Assertions.assertThrows(IllegalArgumentException.class, 
-            () -> new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),"email@com"));
+    public void erroEmailInvalido() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario(CPF_VALIDO, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), "email"));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario(CPF_VALIDO, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), "email.com"));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario(CPF_VALIDO, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), "email@"));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Usuario(CPF_VALIDO, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), "email@com"));
     }
 
     @Test
-    public void sucessoCamposValidos(){
-        Assertions.assertNotNull(new Usuario(CPF_VALIDO,NOME_VALIDO,LocalDate.parse(DATA_NASC_VALIDA),EMAIL_VALIDO));
+    public void sucessoCamposValidos() {
+        Assertions.assertNotNull(new Usuario(CPF_VALIDO, NOME_VALIDO, LocalDate.parse(DATA_NASC_VALIDA), EMAIL_VALIDO));
     }
 
+    @Test
+    public void usuariosDeMesmoCpfSaoIguais() {
+        var usuario1 = new Usuario("111.111.111-11", NOME_VALIDO, null, EMAIL_VALIDO);
+        var usuario2 = new Usuario("111.111.111-11", NOME_VALIDO, null, EMAIL_VALIDO);
+
+        Assertions.assertTrue(usuario1.equals(usuario2));
+    }
 }
