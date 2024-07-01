@@ -1,9 +1,10 @@
 package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
-import br.com.alura.codechella.domain.Endereco;
+import br.com.alura.codechella.domain.values.Endereco;
 
 import static org.junit.jupiter.api.Assertions.*;
 

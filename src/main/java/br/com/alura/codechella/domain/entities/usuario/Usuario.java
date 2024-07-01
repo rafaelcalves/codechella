@@ -2,8 +2,8 @@ package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
 
-import br.com.alura.codechella.domain.Endereco;
 import br.com.alura.codechella.domain.Patterns;
+import br.com.alura.codechella.domain.values.Endereco;
 
 public class Usuario {
 
